@@ -1,6 +1,5 @@
 flask
 joblib
+dill
 numpy
 tensorflow
-pickle
-python=3.7
