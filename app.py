@@ -8,7 +8,7 @@ import pickle
 app = Flask(__name__)
 
 # Load the saved model
-model = joblib.load('model.pkl')
+model = joblib.load('model2.pkl')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -17,7 +17,7 @@ def predict():
         data = request.get_json()
         input_text = data['sentence']
         max_sequence_len = 17
-        with open('tokenizer.pkl', 'rb') as f:
+        with open('tokenizer2.pkl', 'rb') as f:
             mytokenizer = pickle.load(f)
 
         sequences = mytokenizer.texts_to_sequences([input_text])[0]
@@ -34,7 +34,7 @@ def predict():
         top_tokens = [[mytokenizer.index_word[idx] for idx in indices] for indices in top_indices]
 
         # Return the prediction as JSON response
-        return jsonify(top_tokens.tolist())
+        return jsonify(top_tokens)
     except Exception as e:
         return jsonify({'error': str(e)})
 
